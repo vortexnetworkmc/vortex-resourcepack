@@ -1,0 +1,1 @@
+{ "parent": "minecraft:block/cross", "textures": { "cross": "vortex:block/crop_overlay/ember_wart" } }

@@ -1,0 +1,1 @@
+{ "parent": "minecraft:block/cactus", "textures": { "particle": "vortex:block/crop_seed/star_cactus_side", "bottom": "vortex:block/crop_seed/star_cactus_bottom", "top": "vortex:block/crop_seed/star_cactus_top", "side": "vortex:block/crop_seed/star_cactus_side" } }

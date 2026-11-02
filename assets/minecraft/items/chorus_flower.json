@@ -1,0 +1,27 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "property": "minecraft:custom_model_data",
+    "index": 0,
+    "cases": [
+      {
+        "when": "vortex:crop_seed/void_chorus",
+        "model": {
+          "type": "minecraft:model",
+          "model": "vortex:item/crop_seed/void_chorus"
+        }
+      },
+      {
+        "when": "vortex:crop_overlay/void_chorus",
+        "model": {
+          "type": "minecraft:model",
+          "model": "vortex:block/crop_overlay/void_chorus"
+        }
+      }
+    ],
+    "fallback": {
+        "type": "minecraft:model",
+        "model": "minecraft:block/chorus_flower"
+      }
+  }
+}

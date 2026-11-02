@@ -1,0 +1,1 @@
+{ "parent": "minecraft:block/chorus_flower", "textures": { "texture": "vortex:block/crop_seed/void_chorus_flower" } }

@@ -1,0 +1,20 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "property": "minecraft:custom_model_data",
+    "index": 0,
+    "cases": [
+      {
+        "when": "vortex:crop/moon_pumpkin",
+        "model": {
+          "type": "minecraft:model",
+          "model": "vortex:item/crop/moon_pumpkin"
+        }
+      }
+    ],
+    "fallback": {
+        "type": "minecraft:model",
+        "model": "minecraft:block/pumpkin"
+      }
+  }
+}

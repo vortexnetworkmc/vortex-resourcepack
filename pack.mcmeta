@@ -1,6 +1,6 @@
 {
   "pack": {
-    "description": "Vortex Skyblock: custom ores, seeds, shards (mining module)",
+    "description": "Vortex Skyblock: custom ores, seeds, shards and prestige crops",
     "min_format": [69, 0],
     "max_format": [99, 0]
   }

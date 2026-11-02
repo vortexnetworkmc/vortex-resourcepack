@@ -1,0 +1,34 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "property": "minecraft:custom_model_data",
+    "index": 0,
+    "cases": [
+      {
+        "when": "vortex:crop_seed/star_cactus",
+        "model": {
+          "type": "minecraft:model",
+          "model": "vortex:item/crop_seed/star_cactus"
+        }
+      },
+      {
+        "when": "vortex:crop/star_cactus",
+        "model": {
+          "type": "minecraft:model",
+          "model": "vortex:item/crop/star_cactus"
+        }
+      },
+      {
+        "when": "vortex:crop_overlay/star_cactus",
+        "model": {
+          "type": "minecraft:model",
+          "model": "vortex:block/crop_overlay/star_cactus"
+        }
+      }
+    ],
+    "fallback": {
+        "type": "minecraft:model",
+        "model": "minecraft:block/cactus"
+      }
+  }
+}
