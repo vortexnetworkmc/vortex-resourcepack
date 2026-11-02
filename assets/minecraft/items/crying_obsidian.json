@@ -1,0 +1,27 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "property": "minecraft:custom_model_data",
+    "index": 0,
+    "cases": [
+      {
+        "when": "vortex:ore/voidstone",
+        "model": {
+          "type": "minecraft:model",
+          "model": "vortex:block/ore/voidstone"
+        }
+      },
+      {
+        "when": "vortex:seed/voidstone",
+        "model": {
+          "type": "minecraft:model",
+          "model": "vortex:block/ore/voidstone"
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "minecraft:block/crying_obsidian"
+    }
+  }
+}

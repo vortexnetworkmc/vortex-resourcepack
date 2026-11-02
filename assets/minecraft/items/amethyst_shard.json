@@ -1,0 +1,69 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "property": "minecraft:custom_model_data",
+    "index": 0,
+    "cases": [
+      {
+        "when": "vortex:item/amethyst",
+        "model": {
+          "type": "minecraft:model",
+          "model": "vortex:item/ore/amethyst"
+        }
+      },
+      {
+        "when": "vortex:shard/1",
+        "model": {
+          "type": "minecraft:model",
+          "model": "vortex:item/shard/1"
+        }
+      },
+      {
+        "when": "vortex:shard/2",
+        "model": {
+          "type": "minecraft:model",
+          "model": "vortex:item/shard/2"
+        }
+      },
+      {
+        "when": "vortex:shard/3",
+        "model": {
+          "type": "minecraft:model",
+          "model": "vortex:item/shard/3"
+        }
+      },
+      {
+        "when": "vortex:shard/4",
+        "model": {
+          "type": "minecraft:model",
+          "model": "vortex:item/shard/4"
+        }
+      },
+      {
+        "when": "vortex:shard/5",
+        "model": {
+          "type": "minecraft:model",
+          "model": "vortex:item/shard/5"
+        }
+      },
+      {
+        "when": "vortex:shard/6",
+        "model": {
+          "type": "minecraft:model",
+          "model": "vortex:item/shard/6"
+        }
+      },
+      {
+        "when": "vortex:shard/7",
+        "model": {
+          "type": "minecraft:model",
+          "model": "vortex:item/shard/7"
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "minecraft:item/amethyst_shard"
+    }
+  }
+}

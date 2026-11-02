@@ -1,0 +1,27 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "property": "minecraft:custom_model_data",
+    "index": 0,
+    "cases": [
+      {
+        "when": "vortex:ore/onyx",
+        "model": {
+          "type": "minecraft:model",
+          "model": "vortex:block/ore/onyx"
+        }
+      },
+      {
+        "when": "vortex:seed/onyx",
+        "model": {
+          "type": "minecraft:model",
+          "model": "vortex:block/ore/onyx"
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "minecraft:block/obsidian"
+    }
+  }
+}

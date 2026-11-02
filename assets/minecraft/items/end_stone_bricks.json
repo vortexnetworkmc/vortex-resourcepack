@@ -1,0 +1,27 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "property": "minecraft:custom_model_data",
+    "index": 0,
+    "cases": [
+      {
+        "when": "vortex:ore/starfall",
+        "model": {
+          "type": "minecraft:model",
+          "model": "vortex:block/ore/starfall"
+        }
+      },
+      {
+        "when": "vortex:seed/starfall",
+        "model": {
+          "type": "minecraft:model",
+          "model": "vortex:block/ore/starfall"
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "minecraft:block/end_stone_bricks"
+    }
+  }
+}

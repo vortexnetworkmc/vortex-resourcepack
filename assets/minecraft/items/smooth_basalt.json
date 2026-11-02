@@ -1,0 +1,83 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "property": "minecraft:custom_model_data",
+    "index": 0,
+    "cases": [
+      {
+        "when": "vortex:ore/amethyst_depleted",
+        "model": {
+          "type": "minecraft:model",
+          "model": "vortex:block/ore/amethyst_depleted"
+        }
+      },
+      {
+        "when": "vortex:ore/topaz_depleted",
+        "model": {
+          "type": "minecraft:model",
+          "model": "vortex:block/ore/topaz_depleted"
+        }
+      },
+      {
+        "when": "vortex:ore/jade_depleted",
+        "model": {
+          "type": "minecraft:model",
+          "model": "vortex:block/ore/jade_depleted"
+        }
+      },
+      {
+        "when": "vortex:ore/sapphire_depleted",
+        "model": {
+          "type": "minecraft:model",
+          "model": "vortex:block/ore/sapphire_depleted"
+        }
+      },
+      {
+        "when": "vortex:ore/ruby_depleted",
+        "model": {
+          "type": "minecraft:model",
+          "model": "vortex:block/ore/ruby_depleted"
+        }
+      },
+      {
+        "when": "vortex:ore/onyx_depleted",
+        "model": {
+          "type": "minecraft:model",
+          "model": "vortex:block/ore/onyx_depleted"
+        }
+      },
+      {
+        "when": "vortex:ore/moonstone_depleted",
+        "model": {
+          "type": "minecraft:model",
+          "model": "vortex:block/ore/moonstone_depleted"
+        }
+      },
+      {
+        "when": "vortex:ore/sunstone_depleted",
+        "model": {
+          "type": "minecraft:model",
+          "model": "vortex:block/ore/sunstone_depleted"
+        }
+      },
+      {
+        "when": "vortex:ore/voidstone_depleted",
+        "model": {
+          "type": "minecraft:model",
+          "model": "vortex:block/ore/voidstone_depleted"
+        }
+      },
+      {
+        "when": "vortex:ore/starfall_depleted",
+        "model": {
+          "type": "minecraft:model",
+          "model": "vortex:block/ore/starfall_depleted"
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "minecraft:block/smooth_basalt"
+    }
+  }
+}
