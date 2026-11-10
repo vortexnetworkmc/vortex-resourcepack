@@ -56,3 +56,15 @@ Jungle, Soulwood, Christmas Tree):
   `vortex:logging/leaves/<tree>` (`vortex:block/logging/<tree>_leaves`, untinted recoloured foliage).
 - `tools/LoggingPackGen.java` made them from the vanilla 26.x art: `java tools/LoggingPackGen.java <vanilla assets/minecraft> .`
   (it only rewrites item definitions it made itself).
+
+How the placeable custom blocks look (recipes module 1.1: Vortex Workbench; gear module 1.1: Dungeon Forge block):
+
+- The item is the vanilla block item (crafting table / smithing table) with a `custom_model_data` string:
+  `vortex:workbench` / `vortex:dungeon_forge`. `assets/minecraft/items/crafting_table.json` and `smithing_table.json`
+  select on it and fall back to the unchanged vanilla model, so plain crafting / smithing tables stay vanilla.
+- Placed, the block stays a vanilla crafting / smithing table (what Bedrock players and players without the pack see).
+  The server puts one item display a hair larger than the block on it (as the ore overlays) holding the same block item
+  with the same string, so the pack draws `vortex:block/workbench` / `vortex:block/dungeon_forge` (cube models with
+  recoloured vanilla art) over it. The Trait Forge story area of every island has a Dungeon Forge block too.
+- `tools/BlocksPackGen.java` made them from the vanilla 26.x art: `java tools/BlocksPackGen.java <vanilla assets/minecraft> .`
+  (it only rewrites the two item definitions it made itself).

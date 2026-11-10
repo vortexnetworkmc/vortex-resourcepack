@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "vortex:block/dungeon_forge_bottom",
+    "east": "vortex:block/dungeon_forge_side",
+    "north": "vortex:block/dungeon_forge_front",
+    "particle": "vortex:block/dungeon_forge_front",
+    "south": "vortex:block/dungeon_forge_front",
+    "up": "vortex:block/dungeon_forge_top",
+    "west": "vortex:block/dungeon_forge_side"
+  }
+}

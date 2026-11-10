@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "vortex:block/workbench_bottom",
+    "east": "vortex:block/workbench_side",
+    "north": "vortex:block/workbench_front",
+    "particle": "vortex:block/workbench_front",
+    "south": "vortex:block/workbench_side",
+    "up": "vortex:block/workbench_top",
+    "west": "vortex:block/workbench_front"
+  }
+}
