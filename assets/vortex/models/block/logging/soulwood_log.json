@@ -1,0 +1,1 @@
+{ "parent": "minecraft:block/cube_column", "textures": { "end": "vortex:block/logging/soulwood_log_top", "side": "vortex:block/logging/soulwood_log" } }

@@ -1,0 +1,27 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "property": "minecraft:custom_model_data",
+    "index": 0,
+    "cases": [
+      {
+        "when": "vortex:logging/log/alpine",
+        "model": {
+          "type": "minecraft:model",
+          "model": "vortex:block/logging/alpine_log"
+        }
+      },
+      {
+        "when": "vortex:logging/log/christmas_tree",
+        "model": {
+          "type": "minecraft:model",
+          "model": "vortex:block/logging/christmas_tree_log"
+        }
+      }
+    ],
+    "fallback": {
+        "type": "minecraft:model",
+        "model": "minecraft:block/spruce_log"
+      }
+  }
+}

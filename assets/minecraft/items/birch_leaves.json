@@ -1,0 +1,26 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "property": "minecraft:custom_model_data",
+    "index": 0,
+    "cases": [
+      {
+        "when": "vortex:logging/leaves/silver_birch",
+        "model": {
+          "type": "minecraft:model",
+          "model": "vortex:block/logging/silver_birch_leaves"
+        }
+      }
+    ],
+    "fallback": {
+        "type": "minecraft:model",
+        "model": "minecraft:block/birch_leaves",
+        "tints": [
+          {
+            "type": "minecraft:constant",
+            "value": -8345771
+          }
+        ]
+      }
+  }
+}

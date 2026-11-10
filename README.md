@@ -43,3 +43,16 @@ The ore textures are generated placeholders; replace PNGs with final art and reb
     rm -f vortex-skyblock.zip && "C:/Program Files/Java/jdk-26.0.1/bin/jar.exe" --create --no-manifest --file vortex-skyblock.zip pack.mcmeta assets
 
 then put the zip's sha1 into the server's `ResPack.yml`.
+
+How the logging trees look (logging module 1.0: AppleWood, Silver Birch, Alpine, Willow, Cherry Blossom, Ironbark, Elder
+Jungle, Soulwood, Christmas Tree):
+
+- Custom saplings and the logging drops are vanilla items with a `custom_model_data` string: saplings
+  `vortex:logging/sapling/<tree>` (on the vanilla sapling / crimson fungus), drops `vortex:logging/<drop>` (Resin on
+  resin_clump, Ward Sap on honeycomb, Wardfruit on apple, Heartwood on creaking_heart, Spawner Essence on ghast_tear).
+- The trees are vanilla logs and leaves. Near a player who loaded this pack the server puts an item display a hair
+  larger than each log / leaves block (hidden from everyone else) holding the vanilla block item with
+  `vortex:logging/log/<tree>` (`vortex:block/logging/<tree>_log`, a cube_column with recoloured bark) or
+  `vortex:logging/leaves/<tree>` (`vortex:block/logging/<tree>_leaves`, untinted recoloured foliage).
+- `tools/LoggingPackGen.java` made them from the vanilla 26.x art: `java tools/LoggingPackGen.java <vanilla assets/minecraft> .`
+  (it only rewrites item definitions it made itself).

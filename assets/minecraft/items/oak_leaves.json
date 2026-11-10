@@ -1,0 +1,26 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "property": "minecraft:custom_model_data",
+    "index": 0,
+    "cases": [
+      {
+        "when": "vortex:logging/leaves/applewood",
+        "model": {
+          "type": "minecraft:model",
+          "model": "vortex:block/logging/applewood_leaves"
+        }
+      }
+    ],
+    "fallback": {
+        "type": "minecraft:model",
+        "model": "minecraft:block/oak_leaves",
+        "tints": [
+          {
+            "type": "minecraft:constant",
+            "value": -12012264
+          }
+        ]
+      }
+  }
+}
