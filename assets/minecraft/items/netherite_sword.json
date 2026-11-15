@@ -1,0 +1,62 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "property": "minecraft:custom_model_data",
+    "index": 0,
+    "cases": [
+      {
+        "when": "vortex:gear/sword_1",
+        "model": {
+          "type": "minecraft:model",
+          "model": "vortex:item/gear/sword_1"
+        }
+      },
+      {
+        "when": "vortex:gear/sword_2",
+        "model": {
+          "type": "minecraft:model",
+          "model": "vortex:item/gear/sword_2"
+        }
+      },
+      {
+        "when": "vortex:gear/sword_3",
+        "model": {
+          "type": "minecraft:model",
+          "model": "vortex:item/gear/sword_3"
+        }
+      },
+      {
+        "when": "vortex:gear/sword_4",
+        "model": {
+          "type": "minecraft:model",
+          "model": "vortex:item/gear/sword_4"
+        }
+      },
+      {
+        "when": "vortex:gear/sword_5",
+        "model": {
+          "type": "minecraft:model",
+          "model": "vortex:item/gear/sword_5"
+        }
+      },
+      {
+        "when": "vortex:gear/sword_6",
+        "model": {
+          "type": "minecraft:model",
+          "model": "vortex:item/gear/sword_6"
+        }
+      },
+      {
+        "when": "vortex:gear/sword_7",
+        "model": {
+          "type": "minecraft:model",
+          "model": "vortex:item/gear/sword_7"
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "minecraft:item/netherite_sword"
+    }
+  }
+}

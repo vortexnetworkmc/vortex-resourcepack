@@ -1,0 +1,62 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "property": "minecraft:custom_model_data",
+    "index": 0,
+    "cases": [
+      {
+        "when": "vortex:gear/pickaxe_1",
+        "model": {
+          "type": "minecraft:model",
+          "model": "vortex:item/gear/pickaxe_1"
+        }
+      },
+      {
+        "when": "vortex:gear/pickaxe_2",
+        "model": {
+          "type": "minecraft:model",
+          "model": "vortex:item/gear/pickaxe_2"
+        }
+      },
+      {
+        "when": "vortex:gear/pickaxe_3",
+        "model": {
+          "type": "minecraft:model",
+          "model": "vortex:item/gear/pickaxe_3"
+        }
+      },
+      {
+        "when": "vortex:gear/pickaxe_4",
+        "model": {
+          "type": "minecraft:model",
+          "model": "vortex:item/gear/pickaxe_4"
+        }
+      },
+      {
+        "when": "vortex:gear/pickaxe_5",
+        "model": {
+          "type": "minecraft:model",
+          "model": "vortex:item/gear/pickaxe_5"
+        }
+      },
+      {
+        "when": "vortex:gear/pickaxe_6",
+        "model": {
+          "type": "minecraft:model",
+          "model": "vortex:item/gear/pickaxe_6"
+        }
+      },
+      {
+        "when": "vortex:gear/pickaxe_7",
+        "model": {
+          "type": "minecraft:model",
+          "model": "vortex:item/gear/pickaxe_7"
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "minecraft:item/netherite_pickaxe"
+    }
+  }
+}

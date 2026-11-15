@@ -1,0 +1,62 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "property": "minecraft:custom_model_data",
+    "index": 0,
+    "cases": [
+      {
+        "when": "vortex:gear/axe_1",
+        "model": {
+          "type": "minecraft:model",
+          "model": "vortex:item/gear/axe_1"
+        }
+      },
+      {
+        "when": "vortex:gear/axe_2",
+        "model": {
+          "type": "minecraft:model",
+          "model": "vortex:item/gear/axe_2"
+        }
+      },
+      {
+        "when": "vortex:gear/axe_3",
+        "model": {
+          "type": "minecraft:model",
+          "model": "vortex:item/gear/axe_3"
+        }
+      },
+      {
+        "when": "vortex:gear/axe_4",
+        "model": {
+          "type": "minecraft:model",
+          "model": "vortex:item/gear/axe_4"
+        }
+      },
+      {
+        "when": "vortex:gear/axe_5",
+        "model": {
+          "type": "minecraft:model",
+          "model": "vortex:item/gear/axe_5"
+        }
+      },
+      {
+        "when": "vortex:gear/axe_6",
+        "model": {
+          "type": "minecraft:model",
+          "model": "vortex:item/gear/axe_6"
+        }
+      },
+      {
+        "when": "vortex:gear/axe_7",
+        "model": {
+          "type": "minecraft:model",
+          "model": "vortex:item/gear/axe_7"
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "minecraft:item/netherite_axe"
+    }
+  }
+}

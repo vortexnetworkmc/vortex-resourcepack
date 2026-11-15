@@ -68,3 +68,17 @@ How the placeable custom blocks look (recipes module 1.1: Vortex Workbench; gear
   recoloured vanilla art) over it. The Trait Forge story area of every island has a Dungeon Forge block too.
 - `tools/BlocksPackGen.java` made them from the vanilla 26.x art: `java tools/BlocksPackGen.java <vanilla assets/minecraft> .`
   (it only rewrites the two item definitions it made itself).
+
+How the Dungeon Gear tools look (gear module 1.2: Dungeon Sword, Axe and Pickaxe, tiers I-VII = dungeon zones 1-7):
+
+- Every gear piece is its NETHERITE_* item with a `custom_model_data` string `vortex:gear/<piece>_<tier>` (piece
+  `sword` / `axe` / `pickaxe`, tier `1`..`7`). `assets/minecraft/items/netherite_sword.json`, `netherite_axe.json` and
+  `netherite_pickaxe.json` select on it and fall back to the vanilla netherite model, so plain netherite tools and
+  players without the pack see vanilla.
+- The models `vortex:item/gear/<piece>_<tier>` (parent `minecraft:item/handheld`) use original 16x16 art in the zone's
+  colours (Amethyst, Topaz, Jade, Sapphire, Ruby, Void, Starfall). Higher tiers get fittings, gems, longer guards,
+  bigger heads and glowing fullers / edges / veins, and tier VII gets sparkles.
+- The armour needs nothing in the pack: gear gives each tier its own vanilla trim (material + pattern), which already
+  shows on the inventory icon and when worn.
+- `tools/GearPackGen.js` draws them pixel by pixel and reads no vanilla art: `node tools/GearPackGen.js . [preview.png]`
+  (it merges its cases into the netherite item definitions and keeps every other case there).
