@@ -80,5 +80,9 @@ How the Dungeon Gear tools look (gear module 1.2: Dungeon Sword, Axe and Pickaxe
   bigger heads and glowing fullers / edges / veins, and tier VII gets sparkles.
 - The armour needs nothing in the pack: gear gives each tier its own vanilla trim (material + pattern), which already
   shows on the inventory icon and when worn.
+- The Dungeon Shards (`vortex:shard/<zone>` on the amethyst shard: dungeon drops, the hub's floating shards and Shard
+  Trader trades, the Recipe Book and spawner icons, and the old `item_model` items through `assets/vortex/items/shard/*`)
+  use the same zone palette: one faceted crystal per zone (Amethyst, Topaz, Jade, Sapphire, Ruby, Void, Starfall), with
+  a glowing ridge from zone 5 and sparkles in zone 7. The models `vortex:item/shard/<zone>` are unchanged.
 - `tools/GearPackGen.js` draws them pixel by pixel and reads no vanilla art: `node tools/GearPackGen.js . [preview.png]`
-  (it merges its cases into the netherite item definitions and keeps every other case there).
+  (it merges its cases into the netherite / amethyst shard item definitions and keeps every other case there).

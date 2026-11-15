@@ -1,18 +1,21 @@
 #!/usr/bin/env node
 'use strict';
 /*
- * Generates the Dungeon Gear tool textures of the vortex-skyblock pack (gear module 1.2: sword, axe and pickaxe of
- * tiers I-VII, one tier per dungeon zone). Everything is drawn here, pixel by pixel, from shapes and per-tier palettes:
- * no vanilla texture is read or copied.
+ * Generates the Dungeon Gear tool textures (gear module 1.2: sword, axe and pickaxe of tiers I-VII, one tier per dungeon
+ * zone) and the Dungeon Shard textures (mining: one shard per zone) of the vortex-skyblock pack. Everything is drawn
+ * here, pixel by pixel, from shapes and per-tier palettes: no vanilla texture is read or copied.
  *
  * The gear module stamps the custom_model_data string "vortex:gear/<piece>_<tier>" (piece sword / axe / pickaxe, tier
- * 1..7) on its NETHERITE_* items. assets/minecraft/items/netherite_<piece>.json selects on it (merged with any cases
- * already there) and falls back to the vanilla netherite model, so plain netherite tools stay vanilla.
+ * 1..7) on its NETHERITE_* items; mining, the dungeon hub, the Recipe Book and the spawners stamp "vortex:shard/<zone>"
+ * on AMETHYST_SHARD. assets/minecraft/items/<vanilla item>.json selects on it (merged with any cases already there) and
+ * falls back to the vanilla model, so the plain vanilla items stay vanilla.
  *
  * Writes:
  *   assets/vortex/textures/item/gear/<piece>_<tier>.png   16x16
  *   assets/vortex/models/item/gear/<piece>_<tier>.json    parent minecraft:item/handheld
  *   assets/minecraft/items/netherite_<piece>.json         select on custom_model_data, vanilla fallback
+ *   assets/vortex/textures/item/shard/<zone>.png          16x16 (models vortex:item/shard/<zone>, item/generated)
+ *   assets/minecraft/items/amethyst_shard.json            the same select, its other cases kept
  * and, with a second argument, a contact sheet (8x, dark + light) and three in-hand style renders.
  *
  *     node tools/GearPackGen.js <pack root> [preview.png]
@@ -21,7 +24,6 @@ const fs = require('fs');
 const path = require('path');
 const zlib = require('zlib');
 
-const PIECES = ['sword', 'axe', 'pickaxe'];
 const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII'];
 
 // ---- palettes: tier n = dungeon zone n (Gear.yml tier names / Mining.yml zone colours) --------------------------------
@@ -400,7 +402,59 @@ function pickaxe(n) {
    return g;
 }
 
-const DRAW = {sword, axe, pickaxe};
+/**
+ * A Dungeon Shard: one faceted crystal on the tool diagonal, its point to the top-right, broken (jagged) at the
+ * bottom-left. Facets run along it (lit upper-left facet, a bright ridge, shaded lower-right facets) and the point's
+ * facets are a step lighter. The same shape for every tier (it is a currency: the zone colour tells them apart);
+ * tier V+ glows along the ridge, VII sparkles.
+ */
+function shard(n) {
+   const tip = 12, half = 4, crown = 5;
+   const broken = {'-4': 2, '-3': 1, '-2': 2, '-1': 0, 0: 1, 1: 0, 2: 2, 3: 1, 4: 3};
+   const main = mask((x, y, t, p) => {
+      const w = Math.min(half, Math.floor((tip - t) / 2), 2 + Math.floor((t + 10) / 2));
+      return Math.abs(p) <= w && t >= -10 + (broken[p] || 0);
+   });
+   const g = render([{m: main, kind: 'metal', outline: 'all'}]);
+   const lighter = {1: '2', 2: '3', 3: '4', 4: '4'};
+   for (let y = 0; y < 16; y++) {
+      for (let x = 0; x < 16; x++) {
+         const t = T(x, y), p = P(x, y), r = getp(g, x, y);
+         if (r === '.' || r === 'o') {
+            continue;
+         }
+
+         let f = p <= -2 ? '3' : p === -1 ? '4' : p <= 1 ? '2' : '1';
+         if (t >= crown) {
+            f = lighter[f];
+         }
+
+         if (p === -1 && n >= 5 && t >= -7 && t < crown) {
+            f = n >= 6 && ((t % 4) + 4) % 4 === 1 ? 'W' : 'w';
+         }
+
+         setp(g, x, y, f);
+      }
+   }
+
+   if (n >= 7) {
+      sparkle(g, 10, 4, false);
+      sparkle(g, 5, 10, false);
+      setp(g, 12, 2, 'W');
+   }
+
+   return g;
+}
+
+const DRAW = {sword, axe, pickaxe, shard};
+
+/** What is drawn: the pack folder / model id of each tier, the custom_model_data string and the vanilla item it is on. */
+const KINDS = [
+   {key: 'sword', item: 'netherite_sword', parent: 'minecraft:item/handheld', id: n => 'gear/sword_' + n, when: n => 'vortex:gear/sword_' + n},
+   {key: 'axe', item: 'netherite_axe', parent: 'minecraft:item/handheld', id: n => 'gear/axe_' + n, when: n => 'vortex:gear/axe_' + n},
+   {key: 'pickaxe', item: 'netherite_pickaxe', parent: 'minecraft:item/handheld', id: n => 'gear/pickaxe_' + n, when: n => 'vortex:gear/pickaxe_' + n},
+   {key: 'shard', item: 'amethyst_shard', parent: 'minecraft:item/generated', id: n => 'shard/' + n, when: n => 'vortex:shard/' + n}];
+const ROWS = KINDS.map(k => k.key);
 
 // ---- colours / PNG -----------------------------------------------------------------------------------------------------
 
@@ -477,13 +531,13 @@ function writeFile(rel, data) {
 }
 
 /**
- * assets/minecraft/items/netherite_<piece>.json: a select on custom_model_data index 0. Cases already in the file are
- * kept (ours are replaced in place / appended), and so is its fallback; a new file falls back to the vanilla model.
+ * assets/minecraft/items/<item>.json: a select on custom_model_data index 0. Cases already in the file are kept (ours
+ * are replaced in place / appended), and so is its fallback; a new file falls back to the vanilla model.
  */
-function definition(piece, cases) {
-   const rel = 'assets/minecraft/items/netherite_' + piece + '.json';
+function definition(item, cases) {
+   const rel = 'assets/minecraft/items/' + item + '.json';
    const file = path.join(PACK, rel);
-   const vanilla = {type: 'minecraft:model', model: 'minecraft:item/netherite_' + piece};
+   const vanilla = {type: 'minecraft:model', model: 'minecraft:item/' + item};
    let def = {model: {type: 'minecraft:select', property: 'minecraft:custom_model_data', index: 0, cases: [], fallback: vanilla}};
    if (fs.existsSync(file)) {
       const old = JSON.parse(fs.readFileSync(file, 'utf8'));
@@ -509,8 +563,24 @@ function definition(piece, cases) {
       }
    }
 
-   writeFile(rel, JSON.stringify(def, null, 2) + '\n');
+   writeJson(rel, def);
    return list.length;
+}
+
+/** Writes a JSON file unless the file already holds the same JSON (an existing file keeps its layout). */
+function writeJson(rel, obj) {
+   const file = path.join(PACK, rel);
+   if (fs.existsSync(file)) {
+      try {
+         if (JSON.stringify(JSON.parse(fs.readFileSync(file, 'utf8'))) === JSON.stringify(obj)) {
+            return;
+         }
+      } catch (e) {
+         // unreadable: rewrite it
+      }
+   }
+
+   writeFile(rel, JSON.stringify(obj, null, 2) + '\n');
 }
 
 // ---- preview -----------------------------------------------------------------------------------------------------------
@@ -630,14 +700,14 @@ function inHand(img, rgba, cx, cy, size, angle, tilt) {
 
 function preview(out, sprites) {
    const S = 8, cell = 16 * S, pad = 16, left = 112, headH = 52;
-   const cols = 7, rowsN = PIECES.length;
+   const cols = 7, rowsN = ROWS.length;
    const W = left + cols * (cell + pad) + pad;
    const panelH = headH + rowsN * (cell + pad) + pad;
    const handH = 320;
-   const sizeH = 34 + 2 * (3 * (48 + 4) + 16);
+   const sizeH = 34 + 2 * (ROWS.length * (48 + 4) + 16);
    const H = 44 + panelH * 2 + sizeH + 44 + handH + pad;
    const img = new Image(W, H, [20, 18, 26]);
-   img.text('VORTEX SKYBLOCK - DUNGEON GEAR TOOLS I-VII (16X16, SHOWN 8X)', pad, 14, 2, [235, 225, 255]);
+   img.text('VORTEX SKYBLOCK - DUNGEON GEAR TOOLS AND SHARDS I-VII (16X16, SHOWN 8X)', pad, 14, 2, [235, 225, 255]);
    const panels = [{y: 44, bg: [30, 28, 36], card: [42, 39, 50], fg: [220, 214, 235]},
       {y: 44 + panelH, bg: [228, 226, 234], card: [204, 202, 212], fg: [40, 36, 52]}];
    for (const pn of panels) {
@@ -648,7 +718,7 @@ function preview(out, sprites) {
          img.text(TIERS[n - 1].name, x, pn.y + 32, 2, pn.fg);
       }
 
-      PIECES.forEach((piece, r) => {
+      ROWS.forEach((piece, r) => {
          const y = pn.y + headH + r * (cell + pad);
          img.text(piece, pad, y + cell / 2 - 7, 2, pn.fg);
          for (let n = 1; n <= 7; n++) {
@@ -661,7 +731,7 @@ function preview(out, sprites) {
 
    // actual size (1x, 2x, 3x: the inventory at GUI scale 1-3) on both backgrounds
    const sy = 44 + panelH * 2;
-   const bandH = 3 * (48 + 4) + 16;
+   const bandH = ROWS.length * (48 + 4) + 16;
    img.fill(0, sy, W, 34 + bandH, [30, 28, 36]);
    img.fill(0, sy + 34 + bandH, W, bandH, [228, 226, 234]);
    img.text('ACTUAL SIZE: 1X 2X 3X (INVENTORY AT GUI SCALE 1-3)', pad, sy + 12, 2, [220, 214, 235]);
@@ -669,7 +739,7 @@ function preview(out, sprites) {
       let x = pad;
       const y0 = sy + 34 + side * bandH + 8;
       [1, 2, 3].forEach(sc => {
-         PIECES.forEach((piece, r) => {
+         ROWS.forEach((piece, r) => {
             for (let n = 1; n <= 7; n++) {
                img.sprite(sprites[piece][n], x + (n - 1) * (16 * sc + 4), y0 + r * (16 * sc + 4), sc);
             }
@@ -709,27 +779,26 @@ const PACK = path.resolve(process.argv[2] || '.');
 const PREVIEW = process.argv[3];
 const sprites = {};
 const ascii = [];
-for (const piece of PIECES) {
-   sprites[piece] = {};
+for (const kind of KINDS) {
+   sprites[kind.key] = {};
    const cases = [];
    for (let n = 1; n <= 7; n++) {
-      const id = piece + '_' + n;
-      const g = DRAW[piece](n);
+      const id = kind.id(n);
+      const g = DRAW[kind.key](n);
       const rgba = toRgba(g, n);
-      sprites[piece][n] = rgba;
+      sprites[kind.key][n] = rgba;
       ascii.push(id);
       for (let y = 0; y < 16; y++) {
          ascii.push(g.slice(y * 16, y * 16 + 16).join(''));
       }
 
-      writeFile('assets/vortex/textures/item/gear/' + id + '.png', encodePng(16, 16, rgba));
-      writeFile('assets/vortex/models/item/gear/' + id + '.json',
-         JSON.stringify({parent: 'minecraft:item/handheld', textures: {layer0: 'vortex:item/gear/' + id}}, null, 2) + '\n');
-      cases.push(['vortex:gear/' + id, 'vortex:item/gear/' + id]);
+      writeFile('assets/vortex/textures/item/' + id + '.png', encodePng(16, 16, rgba));
+      writeJson('assets/vortex/models/item/' + id + '.json', {parent: kind.parent, textures: {layer0: 'vortex:item/' + id}});
+      cases.push([kind.when(n), 'vortex:item/' + id]);
    }
 
-   const total = definition(piece, cases);
-   console.log('netherite_' + piece + '.json: ' + total + ' cases');
+   const total = definition(kind.item, cases);
+   console.log(kind.item + '.json: ' + total + ' cases');
 }
 
 if (PREVIEW) {
